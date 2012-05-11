@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  ExampleDataSource.h
 //  ImageViewer
 //
 //  Created by Adrian Florian on 5/11/12.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface ExampleDataSource : UIViewController
 
 @end
