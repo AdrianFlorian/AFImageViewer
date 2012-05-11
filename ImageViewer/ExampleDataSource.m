@@ -3,41 +3,50 @@
 //  ImageViewer
 //
 //  Created by Adrian Florian on 5/11/12.
-//  Copyright (c) 2012 Autouncle. All rights reserved.
+//  Copyright (c) 2012 Adrian Florian. All rights reserved.
 //
 
 #import "ExampleDataSource.h"
-
+#import "AFImageViewer.h"
 @interface ExampleDataSource ()
+
+-(NSArray *) images;
 
 @end
 
 @implementation ExampleDataSource
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+@synthesize imageViewer;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    self.title = @"Data source example";
+    
+    self.imageViewer.images = [self images];
+    
+    self.imageViewer.contentMode = UIViewContentModeScaleAspectFit;
+}
+
+-(NSArray *) images
+{
+    NSArray *imageNames = [NSArray arrayWithObjects:@"1.jpg", @"2.jpg", @"3.jpg", @"4.jpg", nil];
+    NSMutableArray *images = [NSMutableArray array];
+    
+    for (NSString *imageName in imageNames) [images addObject:[UIImage imageNamed:imageName]];
+    
+    return images;
 }
 
 - (void)viewDidUnload
 {
+    [self setImageViewer:nil];
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
+
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
 }
 
 @end
