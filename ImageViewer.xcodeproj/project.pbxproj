@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F7137712155DA96C00B6D6DC /* README.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F7137711155DA96C00B6D6DC /* README.rtf */; };
+		F7137714155DA9B000B6D6DC /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = F7137713155DA9B000B6D6DC /* README.txt */; };
 		F79D1A5E155D2559007C29C1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F79D1A5D155D2559007C29C1 /* UIKit.framework */; };
 		F79D1A60155D2559007C29C1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F79D1A5F155D2559007C29C1 /* Foundation.framework */; };
 		F79D1A62155D2559007C29C1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F79D1A61155D2559007C29C1 /* CoreGraphics.framework */; };
@@ -28,7 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F7137711155DA96C00B6D6DC /* README.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = README.rtf; sourceTree = "<group>"; };
+		F7137713155DA9B000B6D6DC /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		F79D1A59155D2559007C29C1 /* ImageViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F79D1A5D155D2559007C29C1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F79D1A5F155D2559007C29C1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -73,7 +73,7 @@
 		F79D1A4E155D2558007C29C1 = {
 			isa = PBXGroup;
 			children = (
-				F7137711155DA96C00B6D6DC /* README.rtf */,
+				F7137713155DA9B000B6D6DC /* README.txt */,
 				F79D1A63155D2559007C29C1 /* ImageViewer */,
 				F79D1A99155D5570007C29C1 /* Resources */,
 				F79D1A5C155D2559007C29C1 /* Frameworks */,
@@ -218,7 +218,7 @@
 				F79D1A97155D53A6007C29C1 /* 3.jpg in Resources */,
 				F79D1A98155D53A6007C29C1 /* 4.jpg in Resources */,
 				F79D1AA8155D7F10007C29C1 /* dark_blue.jpg in Resources */,
-				F7137712155DA96C00B6D6DC /* README.rtf in Resources */,
+				F7137714155DA9B000B6D6DC /* README.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
