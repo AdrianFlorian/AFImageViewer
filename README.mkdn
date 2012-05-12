@@ -1,0 +1,77 @@
+# AFImageViewer - scroll through images using the old fashioned scrollview and page control way with very little code and effort
+
+## Feature list
+The api is designed to be as simple as possible. AFImageViewer focuses on eliminating all the code you had to do in order to create such a view, and gives you flexibility regarding the way your images will be loaded.
+
+AFImageViewer supports:
+
+- download images from the internet in a separate thread by only giving an array of urls (image urls)
+- give it an array of UIImage objects and it will load it automatically
+- manage the image for each page yourself through a delegate
+
+##Install
+Clone the project to your local machine.
+Under the AFImageViewer group you can find the image viewer files, that's all you'll need.
+
+Don't hesitate to take a look at the examples.
+
+##How to use?
+
+First copy AFImageViewer.h and AFImageViewer.m into your project (make sure you check 'Copy items into destination's group').
+
+Then you can either add a custom UIView in your .xib or in your storyboard controller and set it to AFImageViewer (under IdentityInspector/Custom class) or display it using code : 
+        
+            AFImageViewer *afImgViewer = [[AFImageViewer alloc] initWitFrame:frame];
+            [self.view addSubview:afImgViewer];
+            
+Any of these methods will display the image viewer but we need to load the images we want to show. There are 3 possible ways of doing this:
+
+-asynchronously, by passing an NSArray of NSUrl's to the imagesUrls property
+-synchronously, by passing an NSarray of UIImage's to the images property
+-by implementing the 'AFImageViewerDelegate', which gives you the flexibility of controlling what happens for each page from the delegate
+
+
+###Asynchronously
+
+After you have added the image viewer to your view, you can pass an array of urls to it inside the viewDidLoad method of your viewController:
+    
+            self.imageViewer.imagesUrls = [NSArray arrayWithObjects:[NSURL URLWithString:@"url"], nil];
+
+This will load the images from the web in a separate thread (using GCD), but it will not load all of them, just the pages close to the current page. 
+    For example : page 4 is selected - it will attempt to load page 3 and 5. This way you don't have to send too many requests to the network unless you really need it, and it's memory efficient as well.
+
+###Synchronously
+
+The same way as asynchronously but you have to pass an array of UIImage's:
+            self.imageViewer.images = [NSArray arrayWithObjects:[UIImage imageNamed:@"awesome.jpg"], nil];
+            
+###Delegate
+
+This is a little more work to do, you can use your imagination here, i'll just show you an example:
+    First you have to inherit from the 'AFImageViewerDelegate' protocol, then dont forget to set the delegate to self : self.imageViewer.delegate = self;
+    Then you need to implement these 2 methods:
+    
+            -(int)numberOfImages
+            {
+                return [self.imageUrls count];
+            }
+            
+            //do whatever in here and return an UIImageView object
+            //this example shows the capability of downloading data asyncronously from the network (see the async example for easier implementation)
+            -(UIImageView *)imageViewForPage:(int)page
+            {
+                UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"dark_blue.jpg"]];
+                
+                dispatch_queue_t downloadQueue = dispatch_queue_create("iamge downloader", NULL);
+                
+                dispatch_async(downloadQueue, ^{
+                    NSData *imgData = [NSData dataWithContentsOfURL:[self.imageUrls objectAtIndex:page]];
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        imgView.image = [UIImage imageWithData:imgData];
+                    });
+                });
+                return imgView;
+            }
+            
+
