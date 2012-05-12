@@ -44,6 +44,7 @@ This will load the images from the web in a separate thread (using GCD), but it 
 ###Synchronously
 
 The same way as asynchronously but you have to pass an array of UIImage's:
+
     self.imageViewer.images = [NSArray arrayWithObjects:[UIImage imageNamed:@"awesome.jpg"], nil];
             
 ###Delegate
