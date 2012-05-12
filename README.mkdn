@@ -27,11 +27,9 @@ Then you can either add a custom UIView in your .xib or in your storyboard contr
             
 Any of these methods will display the image viewer but we need to load the images we want to show. There are 3 possible ways of doing this:
 
--asynchronously, by passing an NSArray of NSUrl's to the imagesUrls property.
-
--synchronously, by passing an NSarray of UIImage's to the images property.
-
--by implementing the 'AFImageViewerDelegate', which gives you the flexibility of controlling what happens for each page from the delegate.
+- asynchronously, by passing an NSArray of NSUrl's to the imagesUrls property
+- synchronously, by passing an NSarray of UIImage's to the images property
+- by implementing the 'AFImageViewerDelegate', which gives you the flexibility of controlling what happens for each page from the delegate
 
 
 ###Asynchronously
