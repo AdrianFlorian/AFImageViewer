@@ -1,4 +1,5 @@
-## AFImageViewer - scroll through images using the old fashioned scrollview and page control way with very little code and effort
+## AFImageViewer 
+    Scroll through images using the old fashioned scrollview and page control way with very little code and effort
 
 ## Feature list
 The api is designed to be as simple as possible. AFImageViewer focuses on eliminating all the code you had to do in order to create such a view, and gives you flexibility regarding the way your images will be loaded.
