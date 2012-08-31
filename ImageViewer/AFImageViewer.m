@@ -153,8 +153,9 @@
         [self loadScrollViewWithPage:self.nb - 1];
     } else {
         [self loadScrollViewWithPage: page - 1];
-        [self loadNeighborPagesForPage: page + 1];
+        [self loadScrollViewWithPage: page + 1];
     }
+    pageControlUsed = YES;
 }
 
 -(void)initialize
