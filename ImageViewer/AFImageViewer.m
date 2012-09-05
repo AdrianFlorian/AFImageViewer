@@ -155,7 +155,6 @@
         [self loadScrollViewWithPage: page - 1];
         [self loadScrollViewWithPage: page + 1];
     }
-    pageControlUsed = YES;
 }
 
 -(void)initialize
