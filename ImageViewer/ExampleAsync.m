@@ -25,6 +25,7 @@
     self.imageViewer.contentMode = UIViewContentModeScaleAspectFill;
     self.imageViewer.loadingImage = [UIImage imageNamed:@"dark_blue.jpg"];
     self.imageViewer.tempDownloadedImageSavingEnabled = YES;
+    [self.imageViewer setInitialPage:2];
 }
 
 -(NSArray *)imageUrls

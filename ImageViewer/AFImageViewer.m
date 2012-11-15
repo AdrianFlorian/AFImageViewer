@@ -13,7 +13,7 @@
 @property (strong, nonatomic) UIScrollView *imageScrollView;
 @property (nonatomic, strong) NSMutableArray *viewControllers;
 @property (strong, nonatomic) UIPageControl *pageControl;
-@property (strong, nonatomic) NSMutableArray *downloadedImages;
+@property (strong, nonatomic) NSMutableDictionary *downloadedImages;
 
 -(CGRect) imageViewFrame;
 -(CGRect) pageControlFrame;
@@ -36,6 +36,7 @@
 
 @implementation AFImageViewer {
     BOOL pageControlUsed;
+    int initialPage;
 }
 
 @synthesize imageScrollView = _imageScrollView, viewControllers = _viewControllers, pageControl = _pageControl;
@@ -67,9 +68,9 @@
     }
 }
 
--(NSMutableArray *)downloadedImages
+-(NSMutableDictionary *)downloadedImages
 {
-    if (!_downloadedImages) _downloadedImages = [NSMutableArray array];
+    if (!_downloadedImages) _downloadedImages = [NSMutableDictionary dictionary];
     return _downloadedImages;
 }
 
@@ -137,8 +138,8 @@
     int imageScrollViewHeight = self.imageScrollView.frame.size.height;
     
     [self initializeViewControllers];
-    
-    int currentPage = self.pageControl.currentPage;
+
+    int currentPage = [self currentPage];
 
     [self loadNeighborPagesForPage:self.pageControl.currentPage];
     [self.imageScrollView scrollRectToVisible:CGRectMake(currentPage * imageScrollViewWidth, 0, imageScrollViewWidth, imageScrollViewHeight) animated:NO];
@@ -186,6 +187,7 @@
     self.pageControl.numberOfPages = self.nb;
     self.pageControl.currentPage = 0;
 }
+
 
 #pragma -mark image view handlers
 
@@ -284,9 +286,11 @@
 
 -(UIImageView *)asyncImageViewForPage:(int)page
 {
+    NSNumber *pageNumber = [NSNumber numberWithInt:page];
+    NSLog(@"setting the image for page %@", pageNumber);
     UIImageView *imgView = [[UIImageView alloc] initWithImage:self.loadingImage];
-    if (self.downloadedImages.count > page) {
-        imgView.image = [self.downloadedImages objectAtIndex:page];
+    if ([self.downloadedImages objectForKey:pageNumber]) {
+        imgView.image = self.downloadedImages[pageNumber];
     } else {
         UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
         if (!self.disableSpinnerWhenLoadinImage) {
@@ -307,7 +311,8 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (!self.disableSpinnerWhenLoadinImage) [spinner removeFromSuperview];
                 UIImage *image = [UIImage imageWithData:imgData];
-                if (self.tempDownloadedImageSavingEnabled) [self.downloadedImages addObject:image];
+                if (self.tempDownloadedImageSavingEnabled)
+                    self.downloadedImages[pageNumber] = image;
                 imgView.image = image;
             });
         });
@@ -320,6 +325,16 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return YES;
+}
+
+-(void)setInitialPage:(NSInteger)page
+{
+    self.pageControl.currentPage = page;
+}
+
+-(NSInteger)currentPage
+{
+    return self.pageControl.currentPage;
 }
 
 @end

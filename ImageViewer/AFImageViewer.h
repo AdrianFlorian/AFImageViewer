@@ -27,4 +27,7 @@
 
 -(void) setCustomPageControl:(UIPageControl *) customPageControl;
 
+-(void)setInitialPage:(NSInteger)page;
+-(NSInteger)currentPage;
+
 @end
